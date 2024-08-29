@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Login from './Login';
+import {useAuth} from "../context/AuthProvider";
+import Logout from './Logout';
+
 
 function Navbar() {
+  
+ 
+  
+  const [authUser,setAuthUser]= useAuth();
+  console.log(authUser);
+  
+
+  
 
 
 
@@ -51,13 +62,13 @@ function Navbar() {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li><a className=" dark:text-white">Home</a></li>
-      <li><a className=" dark:text-white">Services</a></li>
-      <li><a className=" dark:text-white">About</a></li>
-      <li><a className=" dark:text-white" >Contact</a></li>
+        <li><a  href="/" className=" dark:text-white">Home</a></li>
+      <li><a  href='/Course 'className=' text-black rounded-md border-black dark:text-white'>Courses</a></li>
+      <li>< a href='/contact' className=' text-black rounded-md  border-black  dark:text-white'>Contact</a></li>
+      <li><a className=" dark:text-white" >About</a></li>
       </ul>
     </div> 
-    <a className="btn btn-ghost text-2xl ml-4">Bookstore</a>
+    <a className="btn btn-ghost text-2xl ml-4 px-4 md:px-2">Bookstore</a>
   </div>
   <div>
   <div className="navbar-center hidden lg:flex">
@@ -69,7 +80,7 @@ function Navbar() {
       <li><a  className=' text-black rounded-md border-black  dark:text-white '>About</a></li>
     </ul>
   </div>
-  <div className= ' mx-2 ' >
+  <div className= ' mx-2  hidden md:block ' >
      <input type="text" placeholder="Search" className="input w-full max-w-xs" />
   </div>
   <div className='mx-3 my-1'>
@@ -100,13 +111,16 @@ function Navbar() {
   </svg>
 </label>
   </div>
-  <div className="mx-3   ">
+  {
+    authUser? <Logout/> :
+    <div className="mx-3   ">
     <a className="btn rounded-2xl bg-black text-white font-semibold  py-3 hover:bg-slate-400 hover:text-black" 
      
      onClick={()=>document.getElementById('my_modal_3').showModal()}
     >Login</a>
     <Login/>
   </div>
+  }
   </div>
 </div>
     </>
